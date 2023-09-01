@@ -29,11 +29,7 @@ variable "instance_disk" {
   default = "8192M"
 }
 
-variable "network_ip" {
-  type = string
-}
-
-variable "network_ip" {
+variable "network_address" {
   type = string
 }
 
@@ -67,4 +63,16 @@ variable "cloud_init_file_type" {
 variable "cloud_init_permissions" {
   type    = string
   default = "0644"
+}
+
+variable "cloud_init_users" {
+  type = string
+}
+
+variable "cloud_init_commands" {
+  type = string
+}
+
+variable "cloud_init_files" {
+  type = string
 }

@@ -1,3 +1,3 @@
-output "local_ip" {
-  value = var.network_ip
+output "ip" {
+  value = var.network_address
 }

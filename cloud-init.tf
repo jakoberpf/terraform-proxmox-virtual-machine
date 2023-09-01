@@ -2,12 +2,9 @@ data "template_file" "cloud_init" {
   template = file("${path.module}/templates/cloud-init.tpl")
 
   vars = {
-    users                = local.cloud_init_users,
-    commands             = local.cloud_init_commands,
-    files                = local.cloud_init_files,
-    zerotier_network_id  = var.zerotier_network_id
-    zerotier_public_key  = zerotier_identity.this.public_key
-    zerotier_private_key = zerotier_identity.this.private_key
+    users    = var.cloud_init_users,
+    commands = var.cloud_init_commands,
+    files    = var.cloud_init_files
   }
 }
 

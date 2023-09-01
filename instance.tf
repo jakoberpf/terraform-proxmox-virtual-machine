@@ -18,7 +18,7 @@ resource "proxmox_vm_qemu" "this" {
   os_type = "cloud-init"
 
   # CloudInit - set network IP and gateway if specified, otherwise use dhcp
-  ipconfig0 = var.network_ip != null && var.network_gateway != null ? format("ip=%s,gateway=%s", var.network_ip, var.network_gateway) : "ip=dhcp"
+  ipconfig0 = var.network_address != null && var.network_gateway != null ? format("ip=%s,gateway=%s", var.network_address, var.network_gateway) : "ip=dhcp"
   cicustom  = "user=local:snippets/cloud_init_${var.id}-${random_string.deployment_id.result}.yml"
 
   memory = var.instance_memory
