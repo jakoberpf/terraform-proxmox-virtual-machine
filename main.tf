@@ -27,6 +27,3 @@ resource "random_password" "root_user_password" {
   length = 30
 }
 
-resource "random_password" "github_runner_user_password" {
-  length = 30
-}

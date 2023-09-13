@@ -6,7 +6,7 @@
 #     shell: /bin/bash
 #     sudo: ['ALL=(ALL) NOPASSWD:ALL']
 #     ssh_authorized_keys:
-#      - ${ssh_key}
+#      - ${ssh_authorized_keys}
 #   - name: maintenance
 #     groups: [ sudo ]
 #     shell: /bin/bash
@@ -22,6 +22,11 @@ runcmd:
   - systemctl start qemu-guest-agent
   # # Hosts
   # - echo "127.0.0.1  kube-node.internal" >> /etc/hosts
+  # Expand root partition to maximum size
+  - growpart /dev/vda 3
+  - pvresize /dev/vda3
+  - lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv
+  - resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
   # # Setup Zerotier
   # - curl -o zerotier-install.sh https://raw.githubusercontent.com/jakoberpf/zerotier-scripts/main/zerotier-installer.sh
   # - chmod +x zerotier-install.sh

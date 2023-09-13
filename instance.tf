@@ -3,6 +3,7 @@ locals {
 }
 
 # Create virtual machine
+# Example: https://github.com/Telmate/terraform-provider-proxmox/blob/master/proxmox/resource_vm_qemu.go
 resource "proxmox_vm_qemu" "this" {
   ## Wait for the cloud-config file to exist
   depends_on = [
@@ -19,7 +20,7 @@ resource "proxmox_vm_qemu" "this" {
 
   # CloudInit - set network IP and gateway if specified, otherwise use dhcp
   ipconfig0 = var.network_address != null && var.network_gateway != null ? format("ip=%s,gateway=%s", var.network_address, var.network_gateway) : "ip=dhcp"
-  cicustom  = "user=local:snippets/cloud_init_${var.id}-${random_string.deployment_id.result}.yml"
+  cicustom  = format("%s/%s%s-%s.%s", "user=local:snippets", var.cloud_init_file_prefix, var.id, local.name, var.cloud_init_file_type)
 
   memory = var.instance_memory
   cores  = var.instance_cpus

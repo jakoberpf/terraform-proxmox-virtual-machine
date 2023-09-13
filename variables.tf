@@ -14,6 +14,10 @@ variable "instance_template" {
   type = string
 }
 
+variable "instance_os_type" {
+  type = string
+}
+
 variable "instance_memory" {
   type    = number
   default = 4096
@@ -30,11 +34,13 @@ variable "instance_disk" {
 }
 
 variable "network_address" {
-  type = string
+  type    = string
+  default = null
 }
 
 variable "network_gateway" {
-  type = string
+  type    = string
+  default = null
 }
 
 variable "ssh_authorized_keys" {
@@ -66,13 +72,22 @@ variable "cloud_init_permissions" {
 }
 
 variable "cloud_init_users" {
-  type = string
+  type = list(object({
+    username = string,
+    password = string
+  }))
+  default = []
 }
 
 variable "cloud_init_commands" {
-  type = string
+  type    = list(string)
+  default = []
 }
 
 variable "cloud_init_files" {
-  type = string
+  type = list(object({
+    path    = string
+    content = string
+  }))
+  default = []
 }
