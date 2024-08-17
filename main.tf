@@ -6,7 +6,7 @@ terraform {
     }
     zerotier = {
       source  = "zerotier/zerotier"
-      version = "~> 1.4.2"
+      version = "~> 1.6.0"
     }
     remote = {
       source  = "tenstad/remote"
